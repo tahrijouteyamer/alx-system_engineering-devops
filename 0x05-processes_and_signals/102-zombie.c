@@ -4,11 +4,11 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-/*
- * infinite_while - Runs an infinite while loop
- *
- * Return: Always 0
- */
+/**
+ *  * infinite_while - Run an infinite while loop.
+ *   *
+ *    * Return: Always 0.
+ *     */
 int infinite_while(void)
 {
 	while (1)
@@ -18,11 +18,11 @@ int infinite_while(void)
 	return (0);
 }
 
-/*
- * main - Creates five zombie processes
- *
- * Return: Always 0
- */
+/**
+ *  * main - Creates five zombie processes.
+ *   *
+ *    * Return: Always 0.
+ *     */
 int main(void)
 {
 	pid_t pid;
@@ -32,7 +32,7 @@ int main(void)
 	{
 		pid = fork();
 		if (pid > 0)
- 		{
+		{
 			printf("Zombie process created, PID: %d\n", pid);
 			sleep(1);
 			count++;
@@ -45,3 +45,4 @@ int main(void)
 
 	return (EXIT_SUCCESS);
 }
+
