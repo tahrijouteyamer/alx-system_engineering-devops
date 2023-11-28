@@ -1,10 +1,5 @@
-# !/usr/bin/env bash
-# SSH Config File
-#
-Host *
-	PasswordAuthentication no
-	IdentityFile ~/.ssh/school
-	SendEnv LANG LC_*
-	HashKnownHosts yes
-	GSSAPIAuthentication yes
-	GSSAPIDelegateCredentials no
+SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/holberton
