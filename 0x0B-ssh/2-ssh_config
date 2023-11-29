@@ -1,5 +1,7 @@
-SendEnv LANG LC_*
-    HashKnownHosts yes
-    GSSAPIAuthentication yes
-    PasswordAuthentication no
-    IdentityFile ~/.ssh/holberton
+# SSH Config File
+#
+Host web-01
+	Hostname 54.158.255.75
+	User ubuntu
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/school
