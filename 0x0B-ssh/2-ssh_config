@@ -1,7 +1,8 @@
-# SSH Config File
-#
-Host web-01
-	Hostname 54.158.255.75
-	User ubuntu
+# This is the ssh client system-wide configuration file.
+# This file provides defaults for users, and the values can be changed
+
+
+Host *
 	PasswordAuthentication no
-	IdentityFile ~/.ssh/school
+   	HostbasedAuthentication no
+    	IdentityFile ~/.ssh/school
