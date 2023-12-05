@@ -1,10 +1,11 @@
- a new HAproxy as a load balancer
+#!/usr/bin/env bash
+# configures a new HAproxy as a load balancer
 
-# Installs HAproxy on a server
+# Install HAproxy on a server
 apt-get -y update
 apt-get -y install haproxy=1.6.\*
 
-# Configures haproxy configuration file to distribute requests using a roundrobin algorithm
+# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
 echo '
 frontend tahrijouteyamer.tech
         bind 0:80
@@ -12,8 +13,8 @@ frontend tahrijouteyamer.tech
 
 backend web_servers
         balance roundrobin
-        server 64820-web-01 54.158.255.75
-        server 64820-web-02 35.174.211.170
+        server 367946-web-01 54.198.51.49
+        server 367946-web-02 18.207.142.50
 ' >> /etc/haproxy/haproxy.cfg
 
 # Restart HAproxy service
