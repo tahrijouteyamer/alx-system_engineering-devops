@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# server lb-01 login
+
+ssh ubuntu@3.83.227.107

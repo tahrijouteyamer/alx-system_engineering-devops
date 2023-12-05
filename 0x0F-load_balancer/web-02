@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# server web-02 login
+
+ssh ubuntu@18.207.142.50

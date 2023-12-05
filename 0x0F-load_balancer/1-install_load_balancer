@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
-# configures a new HAproxy as a load balancer
+# Installs HAProxy with the following configurations:
+# - Enables management via the init script.
+# - Distributes requests using a round-robin algorithm.
 
-# Install HAproxy on a server
-apt-get -y update
-apt-get -y install haproxy=1.6.\*
+sudo apt-get install -y haproxy
 
-# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
-echo '
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+cat <<EOT | sudo tee -a /etc/haproxy/haproxy.cfg
 frontend tahrijouteyamer.tech
-        bind 0:80
-        default_backend web_servers
+    timeout client  30000
+    bind 0:80
+    default_backend tahrijouteyamer.tech_backend
 
-backend web_servers
-        balance roundrobin
-        server 367946-web-01 54.198.51.49
-        server 367946-web-02 18.207.142.50
-' >> /etc/haproxy/haproxy.cfg
+backend tahrijouteyamer.tech_backend
+    timeout connect  3000
+    timeout server  30000
+    balance roundrobin
+    server 367946-web-01 54.198.51.49 check
+    server 367946-web-02 18.207.142.50 check
+EOT
 
-# Restart HAproxy service
-service haproxy restart
+sudo service haproxy restart
