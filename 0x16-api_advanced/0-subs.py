@@ -4,19 +4,25 @@
 """
 import requests
 
-
 def number_of_subscribers(subreddit):
-    """
-    Get the number of subscribers for a given subreddit
-    """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'user-agent': 'request'}
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    headers = {'User-Agent': 'CustomUserAgent/1.0'}
+    response = requests.get(url, headers=headers)
 
-    if response.status_code != 200:
+    if response.status_code == 200:
+        subreddit_info = response.json()
+        return subreddit_info['data']['subscribers']
+    elif response.status_code == 404:
+        return 0
+    else:
         return 0
 
-    data = response.json().get("data")
-    num_subs = data.get("subscribers")
+# Example usage:
+subreddit_name = "python"
+subscribers_count = number_of_subscribers(subreddit_name)
 
-    return num_subs
+if subscribers_count > 0:
+    print(f"The subreddit '{subreddit_name}' has {subscribers_count} subscribers.")
+else:
+    print(f"The subreddit '{subreddit_name}' is not valid or not found.")
+
