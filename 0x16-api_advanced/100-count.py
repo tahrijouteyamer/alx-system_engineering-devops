@@ -15,22 +15,23 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
     """
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0\
-            (by /u/Large_Alternative_30)""
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0(by /u/Large_Alternative_30)"
     }
     params = {
         "after": after,
         "count": count,
         "limit": 100
     }
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
+    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    
     try:
+        response.raise_for_status()
         results = response.json()
-        if response.status_code == 404:
-            raise Exception
-    except Exception:
-        print("")
+    except requests.exceptions.HTTPError as errh:
+        print("HTTP Error:", errh)
+        return
+    except requests.exceptions.RequestException as err:
+        print("Request Error:", err)
         return
 
     results = results.get("data")
@@ -54,3 +55,4 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         [print("{}: {}".format(k, v)) for k, v in instances]
     else:
         count_words(subreddit, word_list, instances, after, count)
+
